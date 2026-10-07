@@ -1,0 +1,515 @@
+{
+	"info": {
+		"_postman_id": "d4d5df9d-86ec-4a5a-88cb-0b18f16b08eb",
+		"name": "Ticket.exe API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "51174586",
+		"_collection_link": "https://kl2412018273-9063318.postman.co/workspace/NUR-ALYA-MAISARA-BINTI-KAMARUL-~83307f7f-0565-4ca2-8be3-f44248fa483a/collection/51174586-d4d5df9d-86ec-4a5a-88cb-0b18f16b08eb?action=share&source=collection_link&creator=51174586"
+	},
+	"item": [
+		{
+			"name": "Events & Venues",
+			"item": [
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "List categories - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get category - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/categories/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"categories",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create category - 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "admin",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Festival\", \"description\": \"Multi-day cultural festivals\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete category in use - 409",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "admin",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/categories/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Venues",
+					"item": [
+						{
+							"name": "List venues - filter sort - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/venues?city=Kuala Lumpur&sort=capacity&order=desc&limit=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"venues"
+									],
+									"query": [
+										{
+											"key": "city",
+											"value": "Kuala Lumpur"
+										},
+										{
+											"key": "sort",
+											"value": "capacity"
+										},
+										{
+											"key": "order",
+											"value": "desc"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create venue - 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"name\": \"Dewan Komuniti Cheras\",\r\n     \"address\": \"Jalan Cheras\",\r\n     \"city\": \"Kuala Lumpur\",\r\n     \"state\": \"Wilayah Persekutuan Kuala Lumpur\",\r\n     \"capacity\": 600,\r\n     \"facilities\": \"Stage, parking\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/venues",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"venues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete venue - organiser - 403",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/venues/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"venues",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Events",
+					"item": [
+						{
+							"name": "Create event - 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"title\": \"Python for Beginners\", \"category_id\": 2, \"description\": \"Intro workshop for first-year students\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/events",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List my events - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/events?mine=true",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "mine",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get draft event as public - 404",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/events/9",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit other organiser's event - 403",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"title\": \"Changed by someone else\", \"category_id\": 3 }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/events/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete event - 200",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/events/10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Schedules",
+					"item": [
+						{
+							"name": "Add schedule - 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "2",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "organiser",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "   {\r\n     \"venue_id\": 6,\r\n     \"start_time\": \"2026-11-20T09:00:00+08:00\",\r\n     \"end_time\": \"2026-11-20T12:00:00+08:00\",\r\n     \"ticket_price\": 30,\r\n     \"total_tickets\": 100\r\n   }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/events/9/schedules",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										"9",
+										"schedules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get schedule - 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/schedules/11",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"schedules",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete schedule - 200",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-dev-user-id",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "x-dev-role",
+										"value": "admin",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/schedules/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"schedules",
+										"12"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
