@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket.exe Access</title>
+  <meta name="description" content="Ticket.exe Access: sign in, manage your pass and manage people.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- type="module" lets each JS file import the others -->
+  <script type="module" src="js/app.js"></script>
+</head>
+<body class="is-gate">
+  <header class="topbar" id="topbar" hidden>
+    <a class="wordmark" href="#/profile">Ticket.exe <span>Access</span></a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#/profile" data-nav="profile">My pass</a>
+      <a href="#/users" data-nav="users" hidden>People</a>
+    </nav>
+    <div class="me">
+      <span class="me-id" data-me></span>
+      <button class="btn btn-ghost btn-sm" type="button" id="logout-btn">Sign out</button>
+    </div>
+  </header>
+
+  <main id="app" class="main"></main>
+
+  <dialog id="dialog" class="dialog" aria-modal="true"></dialog>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+</body>
+</html>
