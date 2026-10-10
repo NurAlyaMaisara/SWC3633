@@ -1,6 +1,5 @@
-// =====================================================================
-// Settings for the Access portal (Auth & Users). Change them here only.
-// =====================================================================
+AUTH_MODE: 'jwt'
+
 export const CONFIG = {
   // Where the shared backend API is running
   API_BASE_URL: 'http://localhost:3000/api/v1',

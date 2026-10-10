@@ -11,7 +11,7 @@ export const CONFIG = {
 
   // 'dev' = log in by picking a test account (uses the x-dev-* headers)
   // 'jwt' = real email + password login, once the Auth lead's /auth/login is ready
-  AUTH_MODE: 'dev',
+  AUTH_MODE: 'jwt',
 
   // Only these roles may use the Organiser portal
   ALLOWED_ROLES: ['organiser', 'admin'],
