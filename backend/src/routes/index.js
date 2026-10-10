@@ -6,9 +6,11 @@ router.use('/venues', require('./venues.routes'));
 router.use('/events', require('./events.routes'));
 router.use('/schedules', require('./schedules.routes'));
 
+// Auth & Users lead
+router.use('/auth', require('./auth.routes'));
+router.use('/users', require('./users.routes'));
+
 // Other leads add theirs here, e.g.:
-// router.use('/auth', require('./auth.routes'));
-// router.use('/users', require('./users.routes'));
 // router.use('/bookings', require('./bookings.routes'));
 
 module.exports = router;
