@@ -8,6 +8,1690 @@
   },
   "item": [
     {
+      "name": "Auth & Users",
+      "description": "Run '0. Login' first: each login saves a JWT (adminToken, organiserToken, organiser2Token, staffToken, customerToken) used by every protected request, including Events & Venues.",
+      "item": [
+        {
+          "name": "0. Login (run first)",
+          "item": [
+            {
+              "name": "Login admin - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('adminToken', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@eventbook.test\",\n  \"password\": \"Admin@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login organiser (Wyatt) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('organiserToken', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"wyatt@eventbook.test\",\n  \"password\": \"Organiser@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login organiser (Damon) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('organiser2Token', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"damon@eventbook.test\",\n  \"password\": \"Organiser@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login staff - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('staffToken', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"audrey@eventbook.test\",\n  \"password\": \"Staff@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login customer (Kimi) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('customerToken', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"kimi@eventbook.test\",\n  \"password\": \"Customer@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Register customer - 201",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "pm.collectionVariables.set('newUserEmail', 'aiman' + Date.now() + '@eventbook.test');"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                      "const body = pm.response.json();",
+                      "if (body.data && body.data.token) pm.collectionVariables.set('newUserToken', body.data.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Aiman Hakim\",\n  \"email\": \"{{newUserEmail}}\",\n  \"password\": \"Aiman@2026\",\n  \"phone\": \"0123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register - duplicate email - 409",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 409', () => pm.response.to.have.status(409));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Kimi Again\",\n  \"email\": \"kimi@eventbook.test\",\n  \"password\": \"Customer@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register - invalid data - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"A\",\n  \"email\": \"not-an-email\",\n  \"password\": \"123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register - trying to set role admin - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Sneaky User\",\n  \"email\": \"sneaky@eventbook.test\",\n  \"password\": \"Sneaky@123\",\n  \"role\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register - no API key - 401",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"No Key\",\n  \"email\": \"nokey@eventbook.test\",\n  \"password\": \"NoKey@1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login - wrong password - 401",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@eventbook.test\",\n  \"password\": \"WrongPass@1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login - missing fields - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get my profile - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/auth/me",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get my profile - no token - 401",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/auth/me",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get my profile - invalid token - 401",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{invalidToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/auth/me",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change password - wrong current - 400",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 400', () => pm.response.to.have.status(400));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"current_password\": \"Wrong@1234\",\n  \"new_password\": \"NewPass@2026\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/password",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change password (new customer) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{newUserToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"current_password\": \"Aiman@2026\",\n  \"new_password\": \"Aiman@2027\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/password",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "password"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "List users - paginated - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users?page=1&limit=5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List users - filter search sort - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users?role=customer&search=eventbook&sort=full_name&order=desc",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "customer"
+                    },
+                    {
+                      "key": "search",
+                      "value": "eventbook"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "full_name"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List users - customer - 403",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 403', () => pm.response.to.have.status(403));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List users - invalid sort - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users?sort=password_hash",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "password_hash"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get user (admin) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get own record (customer) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get another user's record (customer) - 403",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 403', () => pm.response.to.have.status(403));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/6",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get user - not found - 404",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/9999",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "9999"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create user (admin) - 201",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "pm.collectionVariables.set('staffEmail', 'nadia' + Date.now() + '@eventbook.test');"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set('userId', pm.response.json().data.id);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Nadia Rahman\",\n  \"email\": \"{{staffEmail}}\",\n  \"password\": \"Nadia@2026\",\n  \"phone\": \"0198765432\",\n  \"role\": \"staff\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create user - invalid role - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Bad Role\",\n  \"email\": \"badrole@eventbook.test\",\n  \"password\": \"BadRole@1\",\n  \"role\": \"superuser\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create user - duplicate email - 409",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 409', () => pm.response.to.have.status(409));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Dup\",\n  \"email\": \"wyatt@eventbook.test\",\n  \"password\": \"Dup@12345\",\n  \"role\": \"staff\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update own profile (customer) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Kimi Antoneli\",\n  \"phone\": \"0123000005\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update own role (customer) - 403",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 403', () => pm.response.to.have.status(403));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Deactivate user (admin) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/{{userId}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login as deactivated user - 403",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 403', () => pm.response.to.have.status(403));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{staffEmail}}\",\n  \"password\": \"Nadia@2026\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Admin deactivates self - 400",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 400', () => pm.response.to.have.status(400));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update - empty body - 422",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 422', () => pm.response.to.have.status(422));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete user who owns events - 409",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 409', () => pm.response.to.have.status(409));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete user - organiser - 403",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 403', () => pm.response.to.have.status(403));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/{{userId}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete user (admin) - 200",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/{{userId}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete user again - 404",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/{{userId}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{userId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Events & Venues",
       "item": [
         {
@@ -79,13 +1763,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -116,13 +1795,8 @@
                 "method": "PUT",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -154,13 +1828,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -191,13 +1860,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -228,13 +1892,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -257,13 +1916,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -345,13 +1999,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -382,13 +2031,8 @@
                 "method": "PUT",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -420,13 +2064,8 @@
                 "method": "PUT",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -458,13 +2097,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -495,13 +2129,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -524,13 +2153,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -553,13 +2177,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -602,13 +2221,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -654,13 +2268,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -693,13 +2302,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -730,13 +2334,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "5",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "customer",
+                    "key": "Authorization",
+                    "value": "Bearer {{customerToken}}",
                     "type": "text"
                   }
                 ],
@@ -767,14 +2366,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text",
-                    "disabled": true
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text",
                     "disabled": true
                   }
@@ -811,13 +2404,8 @@
                     "type": "text"
                   },
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -893,13 +2481,8 @@
                 "method": "PATCH",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -931,13 +2514,8 @@
                 "method": "PATCH",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "3",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiser2Token}}",
                     "type": "text"
                   }
                 ],
@@ -969,13 +2547,8 @@
                 "method": "PUT",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -1007,13 +2580,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -1041,13 +2609,8 @@
                 "method": "PUT",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -1079,13 +2642,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -1118,13 +2676,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -1157,13 +2710,8 @@
                 "method": "POST",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "2",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "organiser",
+                    "key": "Authorization",
+                    "value": "Bearer {{organiserToken}}",
                     "type": "text"
                   }
                 ],
@@ -1220,13 +2768,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -1273,13 +2816,8 @@
                 "method": "DELETE",
                 "header": [
                   {
-                    "key": "x-dev-user-id",
-                    "value": "1",
-                    "type": "text"
-                  },
-                  {
-                    "key": "x-dev-role",
-                    "value": "admin",
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
                     "type": "text"
                   }
                 ],
@@ -1317,6 +2855,46 @@
     {
       "key": "scheduleId",
       "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "organiserToken",
+      "value": ""
+    },
+    {
+      "key": "organiser2Token",
+      "value": ""
+    },
+    {
+      "key": "staffToken",
+      "value": ""
+    },
+    {
+      "key": "customerToken",
+      "value": ""
+    },
+    {
+      "key": "newUserToken",
+      "value": ""
+    },
+    {
+      "key": "newUserEmail",
+      "value": ""
+    },
+    {
+      "key": "staffEmail",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "invalidToken",
+      "value": "expired-or-fake"
     }
   ]
 }
