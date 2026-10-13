@@ -135,8 +135,12 @@ CREATE TABLE schedules (
     REFERENCES venues (id) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- NOTE: no index on schedules.start_time yet. It is added later as a measured
--- optimisation (before/after timing) for the Debugging & Performance section.
+-- Performance optimisation (Debugging & Performance section): GET /events looks
+-- up each event's upcoming schedules by event_id AND start_time, then reads
+-- status and ticket_price. This covering index lets MySQL jump straight to the
+-- upcoming schedules and answer from the index alone, without reading the rows.
+-- Measured before/after with database/performance_test.sql.
+CREATE INDEX idx_schedules_event_start ON schedules (event_id, start_time, status, ticket_price);
 
 -- ---------------------------------------------------------------------
 -- BOOKINGS  (a customer's tickets for one schedule)
