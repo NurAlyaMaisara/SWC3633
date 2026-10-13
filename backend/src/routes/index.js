@@ -13,4 +13,7 @@ router.use('/users', require('./users.routes'));
 // Other leads add theirs here, e.g.:
 // router.use('/bookings', require('./bookings.routes'));
 
+router.use('/bookings', require('./bookings.routes'));
+router.use('/payments', require('./payments.routes'));
+
 module.exports = router;

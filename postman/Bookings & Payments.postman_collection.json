@@ -1,0 +1,2061 @@
+{
+	"info": {
+		"name": "Bookings & Payments (Ticket.exe)",
+		"description": "Bookings & Payments lead tests. Reset the database (schema.sql, then seed.sql) before each full run. Run in order. Needs the environment variables base_url and api_key.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bookings & Payments",
+			"item": [
+				{
+					"name": "0. Login (Bookings & Payments)",
+					"item": [
+						{
+							"name": "Login customer Kimi - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.token) pm.collectionVariables.set(\"kimiToken\", body.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"kimi@eventbook.test\",\n  \"password\": \"Customer@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Login customer Jace - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.token) pm.collectionVariables.set(\"jaceToken\", body.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"jace@eventbook.test\",\n  \"password\": \"Customer@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Login organiser Wyatt - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.token) pm.collectionVariables.set(\"wyattToken\", body.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"wyatt@eventbook.test\",\n  \"password\": \"Organiser@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Login admin - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.token) pm.collectionVariables.set(\"adminToken\", body.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"admin@eventbook.test\",\n  \"password\": \"Admin@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Login staff Audrey - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.token) pm.collectionVariables.set(\"audreyToken\", body.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"audrey@eventbook.test\",\n  \"password\": \"Staff@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Bookings",
+					"item": [
+						{
+							"name": "Create booking - 201",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+											"const body = pm.response.json();",
+											"pm.test(\"data.status is pending\", () => pm.expect(body.data.status).to.eql(\"pending\"));",
+											"pm.test(\"data.total_amount is 240\", () => pm.expect(body.data.total_amount).to.eql(240));",
+											"if (body.data && body.data.id) pm.collectionVariables.set(\"bookingId\", body.data.id);",
+											"if (body.data && body.data.booking_ref) pm.collectionVariables.set(\"bookingRef\", body.data.booking_ref);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 1,\n  \"quantity\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - no login - 401",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 401\", () => pm.response.to.have.status(401));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 1,\n  \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - admin - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 1,\n  \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - quantity 11 - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 422\", () => pm.response.to.have.status(422));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 1,\n  \"quantity\": 11\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - draft event - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 422\", () => pm.response.to.have.status(422));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 7,\n  \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - cancelled event - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": 9,\n  \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Setup - add date with 3 tickets - 201",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.id) pm.collectionVariables.set(\"smallScheduleId\", body.data.id);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/events/2/schedules",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										"2",
+										"schedules"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{wyattToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"venue_id\": 6,\n  \"start_time\": \"2026-12-20T10:00:00+08:00\",\n  \"end_time\": \"2026-12-20T12:00:00+08:00\",\n  \"ticket_price\": 30,\n  \"total_tickets\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Create booking - last 3 tickets - 201",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+											"const body = pm.response.json();",
+											"if (body.data && body.data.id) pm.collectionVariables.set(\"jaceBookingId\", body.data.id);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": {{smallScheduleId}},\n  \"quantity\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Date is sold out - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"pm.test(\"data.available_tickets is 0\", () => pm.expect(body.data.available_tickets).to.eql(0));",
+											"pm.test(\"data.status is sold_out\", () => pm.expect(body.data.status).to.eql(\"sold_out\"));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/schedules/{{smallScheduleId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"schedules",
+										"{{smallScheduleId}}"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								}
+							}
+						},
+						{
+							"name": "Create booking - sold out - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"schedule_id\": {{smallScheduleId}},\n  \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Get booking - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get booking - another customer - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get booking - not found - 404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 404\", () => pm.response.to.have.status(404));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/99999",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"99999"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get booking - invalid id - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 422\", () => pm.response.to.have.status(422));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/abc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"abc"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List my bookings - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings?status=pending&sort=created_at&order=desc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "pending"
+										},
+										{
+											"key": "sort",
+											"value": "created_at"
+										},
+										{
+											"key": "order",
+											"value": "desc"
+										}
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List bookings - admin search - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings?search=Kimi&page=1&limit=5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "Kimi"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List bookings - organiser own event - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings?event_id=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									],
+									"query": [
+										{
+											"key": "event_id",
+											"value": "1"
+										}
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{wyattToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List bookings - invalid status - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 422\", () => pm.response.to.have.status(422));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings?status=paid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "paid"
+										}
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Payments",
+					"item": [
+						{
+							"name": "Pay booking - declined - 402",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 402\", () => pm.response.to.have.status(402));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"card\",\n  \"simulate\": \"fail\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Pay booking - invalid method - 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 422\", () => pm.response.to.have.status(422));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"cash\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Pay booking - another customer - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"card\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Pay booking - 201",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+											"const body = pm.response.json();",
+											"pm.test(\"data.payment.status is paid\", () => pm.expect(body.data.payment.status).to.eql(\"paid\"));",
+											"pm.test(\"data.booking.status is confirmed\", () => pm.expect(body.data.booking.status).to.eql(\"confirmed\"));",
+											"if (body.data && body.data.payment && body.data.payment.id) pm.collectionVariables.set(\"paymentId\", body.data.payment.id);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"fpx\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Pay booking - already paid - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"fpx\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "List payments of a booking - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get payment - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/{{paymentId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"{{paymentId}}"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get payment - another customer - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/{{paymentId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"{{paymentId}}"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get payment - not found - 404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 404\", () => pm.response.to.have.status(404));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/99999",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"99999"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List payments - admin filter - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments?status=paid&method=fpx&sort=amount&order=desc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "paid"
+										},
+										{
+											"key": "method",
+											"value": "fpx"
+										},
+										{
+											"key": "sort",
+											"value": "amount"
+										},
+										{
+											"key": "order",
+											"value": "desc"
+										}
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List my payments - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "List payments - staff - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{audreyToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Cancel bookings",
+					"item": [
+						{
+							"name": "Cancel booking - staff - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{audreyToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Cancel booking - another customer - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 403\", () => pm.response.to.have.status(403));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Cancel booking - refunded - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"pm.test(\"data.status is cancelled\", () => pm.expect(body.data.status).to.eql(\"cancelled\"));",
+											"pm.test(\"data.payment_status is refunded\", () => pm.expect(body.data.payment_status).to.eql(\"refunded\"));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Cancel booking - already cancelled - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Pay booking - cancelled - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{bookingId}}/payments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{bookingId}}",
+										"payments"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"method\": \"card\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							}
+						},
+						{
+							"name": "Cancel booking - tickets back on sale - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/{{jaceBookingId}}/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"{{jaceBookingId}}",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jaceToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Date open again - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+											"const body = pm.response.json();",
+											"pm.test(\"data.available_tickets is 3\", () => pm.expect(body.data.available_tickets).to.eql(3));",
+											"pm.test(\"data.status is open\", () => pm.expect(body.data.status).to.eql(\"open\"));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api_key}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/schedules/{{smallScheduleId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"schedules",
+										"{{smallScheduleId}}"
+									]
+								},
+								"auth": {
+									"type": "noauth"
+								}
+							}
+						},
+						{
+							"name": "Cancel booking - past event - 409",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status is 409\", () => pm.response.to.have.status(409));"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/bookings/5/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bookings",
+										"5",
+										"cancel"
+									]
+								},
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{kimiToken}}",
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1"
+		},
+		{
+			"key": "api_key",
+			"value": "dev-key-123"
+		},
+		{
+			"key": "kimiToken",
+			"value": ""
+		},
+		{
+			"key": "jaceToken",
+			"value": ""
+		},
+		{
+			"key": "wyattToken",
+			"value": ""
+		},
+		{
+			"key": "adminToken",
+			"value": ""
+		},
+		{
+			"key": "audreyToken",
+			"value": ""
+		},
+		{
+			"key": "bookingId",
+			"value": ""
+		},
+		{
+			"key": "bookingRef",
+			"value": ""
+		},
+		{
+			"key": "smallScheduleId",
+			"value": ""
+		},
+		{
+			"key": "jaceBookingId",
+			"value": ""
+		},
+		{
+			"key": "paymentId",
+			"value": ""
+		}
+	]
+}
