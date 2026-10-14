@@ -14,11 +14,11 @@ router.use('/schedules', require('./schedules.routes'));
 router.use('/auth', require('./auth.routes'));
 router.use('/users', require('./users.routes'));
 
-// Integration & API Management lead
-router.use('/attendance', require('./attendance.routes'));
+// Bookings & Payments lead (Zul)
+router.use('/bookings', require('./bookings.routes'));
+router.use('/payments', require('./payments.routes'));
 
-// Other leads add theirs here, e.g.:
-// router.use('/bookings', require('./bookings.routes'));
-// router.use('/payments', require('./payments.routes'));
+// Integration & API Management lead (kau)
+router.use('/attendance', require('./attendance.routes'));
 
 module.exports = router;
