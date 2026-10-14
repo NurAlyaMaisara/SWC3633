@@ -1,3 +1,7 @@
+// =====================================================================
+// Central router (Integration & API Management Lead)
+// Every module mounts its own sub-router here, all under /api/v1.
+// =====================================================================
 const router = require('express').Router();
 
 // Events & Venues lead
@@ -10,7 +14,11 @@ router.use('/schedules', require('./schedules.routes'));
 router.use('/auth', require('./auth.routes'));
 router.use('/users', require('./users.routes'));
 
+// Integration & API Management lead
+router.use('/attendance', require('./attendance.routes'));
+
 // Other leads add theirs here, e.g.:
 // router.use('/bookings', require('./bookings.routes'));
+// router.use('/payments', require('./payments.routes'));
 
 module.exports = router;

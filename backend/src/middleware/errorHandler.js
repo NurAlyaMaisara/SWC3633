@@ -1,7 +1,15 @@
 // =====================================================================
-// Central error handler (starter version). The Integration & API Management
-// lead owns this file and may extend it (logging, etc.). Every error in the
-// API ends up here, so all endpoints return the same JSON error format.
+// Central error handler (Integration & API Management Lead).
+// Every error in the API ends up here, so all endpoints return the
+// same JSON error format:
+//   { success: false, message, error: { code, details? } }
+//
+// Handles:
+//   - ApiError thrown by controllers/services
+//   - Invalid JSON body (express.json parse error)
+//   - MySQL constraint errors (duplicate, FK, check)
+//   - Rate-limit 429 from express-rate-limit
+//   - Anything else -> 500 Internal Server Error (stack kept in logs only)
 // =====================================================================
 const ApiError = require('../utils/ApiError');
 
@@ -28,6 +36,10 @@ module.exports = (err, req, res, next) => {
     message = 'Request body contains invalid JSON';
   } else if (MYSQL_ERRORS[err.code]) {
     [statusCode, code, message] = MYSQL_ERRORS[err.code];
+  } else if (err.status === 429 || err.statusCode === 429) {
+    statusCode = 429;
+    code = 'RATE_LIMIT_EXCEEDED';
+    message = err.message || 'Too many requests. Please try again later.';
   }
 
   // Full details stay in the server log; the client never sees stack traces
